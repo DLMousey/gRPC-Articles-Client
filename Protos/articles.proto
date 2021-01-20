@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "ArticleServiceClient";
+
+package article;
+
+service Articles {
+  rpc GetArticleList (EmptyRequest) returns  (ArticleList);
+  rpc GetArticleDetail (ArticleDetail) returns (Article);
+  rpc CreateArticle (Article) returns (Article);
+  rpc PublishArticle (ArticleDetail) returns (Article);
+  rpc UnpublishArticle (ArticleDetail) returns (Article);
+}
+
+message EmptyRequest {}
+
+message ArticleDetail {
+  string guid = 1;
+}
+
+message ArticleList {
+  repeated Article articles = 1;
+}
+
+message Article {
+  string guid = 1;
+  string title = 2;
+  string content = 3;
+  bool published = 4;
+  string publishedAt = 5;
+}
